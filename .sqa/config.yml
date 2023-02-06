@@ -1,0 +1,46 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/catalogue-ui:
+      branch: main
+      repo: https://github.com/madgeek-arc/catalogue-ui.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/catalogue-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-gold-albatross.sh
+        container: qc.acc_wiggy-green-barnacle
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/catalogue-ui find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-smalt-lionfish.sh
+        container: qc.doc_frumpy-magenta-dodo
+      github.com/madgeek-arc/catalogue-ui git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-puce-dane.sh
+        container: qc.doc_breezy-violet-bee
+      github.com/madgeek-arc/catalogue-ui markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-periwinkle-rattlesnake.sh
+        container: qc.doc_smelly-persimmon-chinchilla
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/catalogue-ui licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.scaly-chartreuse-cichlid.sh
+        container: qc.lic_chummy-viridian-orangutan
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/catalogue-ui get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-ivory-vole.sh
+        container: qc.ver_lumpy-gold-molly
+timeout: 5400
